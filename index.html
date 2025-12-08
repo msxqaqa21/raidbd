@@ -120,6 +120,7 @@ Dzięki RAID możemy jednocześnie zwiększyć szybkość odczytu i zapisu danyc
 
 <section class="mb-5 fade-in">
 <h2 data-pl="Jak działa RAID?" data-ua="Як працює RAID?">Jak działa RAID?</h2>
+
 <p data-pl="Kontroler RAID to specjalny układ lub oprogramowanie, które zarządza wieloma dyskami, prezentując je systemowi operacyjnemu jako jeden dysk logiczny. W zależności od poziomu RAID, kontroler może dzielić dane na bloki, tworzyć kopie lustrzane lub dodawać informacje parzystości, które pozwalają odbudować dane w razie awarii." 
    data-ua="Контролер RAID — це спеціальний чип або програмне забезпечення, яке керує кількома дисками та подає їх операційній системі як один логічний диск. Залежно від рівня RAID, контролер може ділити дані на блоки, створювати дзеркальні копії або додавати інформацію про парність для відновлення даних у разі відмови.">
 Kontroler RAID to specjalny układ lub oprogramowanie, które zarządza wieloma dyskami, prezentując je systemowi operacyjnemu jako jeden dysk logiczny. W zależności od poziomu RAID, kontroler może dzielić dane na bloki, tworzyć kopie lustrzane lub dodawać informacje parzystości, które pozwalają odbudować dane w razie awarii.
@@ -129,7 +130,30 @@ Kontroler RAID to specjalny układ lub oprogramowanie, które zarządza wieloma 
    data-ua="RAID підвищує продуктивність завдяки паралельному читанню та запису даних на кількох дисках одночасно. Також підвищує надійність, захищаючи дані від відмови одного носія.">
 RAID zwiększa wydajność poprzez równoległe odczyty i zapisy danych na wielu dyskach. Jednocześnie zwiększa niezawodność, chroniąc dane przed awarią pojedynczego nośnika.
 </p>
+
+<!-- DODANE: rozszerzona część o kontrolerze -->
+<p data-pl="Kontroler RAID może działać jako karta sprzętowa PCIe, moduł płyty głównej lub oprogramowanie systemowe. Najwydajniejsze są kontrolery sprzętowe, które mają własny procesor, pamięć cache oraz często baterię lub moduł podtrzymujący dane (BBU/FBU). Dzięki temu są w stanie samodzielnie wykonywać obliczenia parzystości i zarządzać macierzą bez obciążania procesora komputera." 
+   data-ua="RAID-контролер може бути апаратною PCIe-картою, модулем материнської плати або програмним рішенням. Найпродуктивнішими є апаратні контролери, які мають власний процесор, кеш та батарею для збереження даних. Це дозволяє їм виконувати обчислення парності та керувати масивом без навантаження на процесор.">
+Kontroler RAID może działać jako karta sprzętowa PCIe, moduł płyty głównej lub oprogramowanie systemowe. Najwydajniejsze są kontrolery sprzętowe, które mają własny procesor, pamięć cache oraz często baterię lub moduł podtrzymujący dane (BBU/FBU). Dzięki temu są w stanie samodzielnie wykonywać obliczenia parzystości i zarządzać macierzą bez obciążania procesora komputera.
+</p>
+
+<p data-pl="Zaawansowane kontrolery RAID obsługują funkcje takie jak hot-swap, monitoring SMART, automatyczne wykrywanie awarii, sprzętowe szyfrowanie oraz obsługę wielu złączy – od podstawowych SATA po profesjonalne SAS i mini-SAS HD. W zastosowaniach serwerowych pozwalają także na odbudowę danych z prędkością wielokrotnie większą niż rozwiązania programowe." 
+   data-ua="Просунуті RAID-контролери підтримують hot-swap, моніторинг SMART, автоматичне виявлення відмов, апаратне шифрування та різні типи інтерфейсів — від SATA до професійних SAS або mini-SAS HD. У серверних системах вони забезпечують значно швидше відновлення даних порівняно з програмними рішеннями.">
+Zaawansowane kontrolery RAID obsługują funkcje takie jak hot-swap, monitoring SMART, automatyczne wykrywanie awarii, sprzętowe szyfrowanie oraz obsługę wielu złączy – od podstawowych SATA po profesjonalne SAS i mini-SAS HD. W zastosowaniach serwerowych pozwalają także na odbudowę danych z prędkością wielokrotnie większą niż rozwiązania programowe.
+</p>
+
+<p data-pl="Warto pamiętać, że to kontroler przechowuje konfigurację macierzy. W przypadku jego awarii może być konieczna wymiana na ten sam lub kompatybilny model, aby ponownie odczytać układ danych na dyskach. Dlatego w środowiskach profesjonalnych stosuje się redundantne kontrolery i regularne kopie konfiguracji." 
+   data-ua="Контролер зберігає конфігурацію масиву. У разі його відмови може знадобитися заміна на ту саму або сумісну модель, щоб знову прочитати структуру даних. Тому у професійних системах використовують резервні контролери та регулярні копії конфігурації.">
+Warto pamiętać, że to kontroler przechowuje konfigurację macierzy. W przypadku jego awarii może być konieczna wymiana na ten sam lub kompatybilny model, aby ponownie odczytać układ danych na dyskach. Dlatego w środowiskach profesjonalnych stosuje się redundantne kontrolery i regularne kopie konfiguracji.
+</p>
+<!-- KONIEC DODANEGO -->
+
+<figure>
+  <img src="3.png" alt="Obraz AI - schemat RAID" class="img-top-card">
+  <figcaption>Kontroler RAID PCIe z podłączonymi dyskami SATA</figcaption>
+</figure>
 </section>
+
 
 <section class="mb-5 fade-in">
 <h2 data-pl="Poziomy RAID" data-ua="Рівні RAID">Poziomy RAID</h2>
@@ -332,6 +356,8 @@ document.getElementById("langToggle").addEventListener("click", () => {
 
 </body>
 </html>
+
+
 
 
 
