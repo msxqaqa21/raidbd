@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RAID — Technologia i macierze dyskowe</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body {
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e, #0f0c29);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #e6e6e6;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 600;
+}
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+h1, h2 {
+    color: #4da8ff;
+    font-weight: 700;
+}
+
+.card {
+    background-color: rgba(20, 27, 43, 0.85);
+    border: 1px solid #2d323b;
+    transition: 0.3s;
+    color: #e6e6e6;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    border-color: #4da8ff;
+    box-shadow: 0 0 20px rgba(77, 168, 255, 0.5);
+}
+
+.img-card {
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.img-top-card {
+    width: 100%;       /* растянуть по ширине */
+    height: 450px;     /* увеличить высоту */
+    object-fit: contain; 
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+
+.lang-btn {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    padding: 8px 15px;
+    background: #00ff99;
+    border: 1px solid #00ff99;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: 0.3s;
+    z-index: 100;
+}
+
+.lang-btn:hover {
+    background: #00cc77;
+    color: black;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fade 1.2s forwards;
+}
+
+@keyframes fade {
+    to { opacity: 1; }
+}
+
+.footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    color: #7a7a7a;
+    font-size: 14px;
+}
+</style>
+</head>
+<body class="container py-5">
+
+<button id="langToggle" class="lang-btn">🇵🇱 PL</button>
+
+<h1 class="text-center mb-5 fade-in" data-pl="RAID — macierze dyskowe" data-ua="RAID — дискові масиви">
+RAID — macierze dyskowe
+</h1>
+
+<section class="mb-5 fade-in">
+<h2 data-pl="Co to jest RAID?" data-ua="Що таке RAID?">Co to jest RAID?</h2>
+<p data-pl="RAID (redundant array of independent disks) to technologia łączenia wielu dysków w jedną jednostkę logiczną w celu zwiększenia niezawodności i wydajności. Zwykle używa się dysków HDD, ale coraz częściej stosuje się SSD."
+   data-ua="RAID (redundant array of independent disks) — це технологія об’єднання кількох дисків в одну логічну систему для підвищення надійності та продуктивності. Зазвичай використовуються HDD, але дедалі частіше застосовуються SSD.">
+RAID (redundant array of independent disks) to technologia łączenia wielu dysków w jedną jednostkę logiczną w celu zwiększenia niezawodności i wydajności. Zwykle używa się dysków HDD, ale coraz częściej stosuje się SSD.
+</p>
+<img src="2.jpg" alt="Obraz AI - schemat RAID" class="img-top-card">
+
+</section>
+
+<section class="mb-5 fade-in">
+<h2 data-pl="Poziomy RAID" data-ua="Рівні RAID">Poziomy RAID</h2>
+
+<!-- RAID 0 -->
+<div class="card p-3 mb-3">
+<h5 data-pl="RAID 0" data-ua="RAID 0">RAID 0</h5>
+<img src="raid0.webp" alt="RAID 0" class="img-card">
+<p data-pl="RAID 0, czyli striping, dzieli dane równomiernie między dwa lub więcej dysków. Celem jest zwiększenie wydajności odczytu i zapisu." 
+   data-ua="RAID 0, або чергування дисків, рівномірно розподіляє дані між двома або більше дисками. Мета — підвищення швидкості читання та запису.">
+RAID 0, czyli striping, dzieli dane równomiernie między dwa lub więcej dysków. Celem jest zwiększenie wydajności odczytu i zapisu.
+</p>
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Większa wydajność odczytu i zapisu" data-ua="Підвищена швидкість читання та запису">Większa wydajność odczytu i zapisu</li>
+<li data-pl="Pełne wykorzystanie mocy dysków" data-ua="Повне використання потужності дисків">Pełne wykorzystanie mocy dysków</li>
+<li data-pl="Łatwy do wdrożenia" data-ua="Легко реалізується">Łatwy do wdrożenia</li>
+</ul>
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Brak odporności na awarię" data-ua="Немає відмовостійкості">Brak odporności na awarię</li>
+</ul>
+</div>
+
+<!-- RAID 1 -->
+<div class="card p-3 mb-3">
+<h5 data-pl="RAID 1" data-ua="RAID 1">RAID 1</h5>
+<img src="raid1.webp" alt="RAID 1" class="img-card">
+<p data-pl="RAID 1, czyli mirroring, kopiuje dane jednocześnie na dwa dyski. Każdy dysk ma dokładną kopię."
+   data-ua="RAID 1, або дзеркалювання, копіює дані одночасно на два диски. Кожен диск має точну копію.">
+RAID 1, czyli mirroring, kopiuje dane jednocześnie na dwa dyski. Każdy dysk ma dokładną kopię.
+</p>
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Odporność na awarię" data-ua="Відмовостійкість">Odporność na awarię</li>
+<li data-pl="Szybszy odczyt danych" data-ua="Підвищена швидкість читання">Szybszy odczyt danych</li>
+<li data-pl="Łatwy do wdrożenia" data-ua="Легко реалізується">Łatwy do wdrożenia</li>
+</ul>
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Wykorzystywana jest tylko połowa pojemności dysków" data-ua="Використовується лише половина обсягу дисків">Wykorzystywana jest tylko połowa pojemności dysków</li>
+</ul>
+</div>
+
+<!-- RAID 5 -->
+<div class="card p-3 mb-3">
+<h5 data-pl="RAID 5" data-ua="RAID 5">RAID 5</h5>
+<img src="raid5.webp" alt="RAID 5" class="img-card">
+<p data-pl="RAID 5 używa stripingu i parzystości. Wymaga co najmniej 3 dysków." 
+   data-ua="RAID 5 використовує чергування та парність. Потрібно мінімум 3 диски.">
+RAID 5 używa stripingu i parzystości. Wymaga co najmniej 3 dysków.
+</p>
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Szybki odczyt danych" data-ua="Швидкий читання">Szybki odczyt danych</li>
+<li data-pl="Odporność na awarię" data-ua="Відмовостійкість">Odporność na awarię</li>
+<li data-pl="Dostęp do wszystkich danych" data-ua="Доступ до всіх даних">Dostęp do wszystkich danych</li>
+</ul>
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Dłuższy czas odzyskiwania danych" data-ua="Довший час відновлення даних">Dłuższy czas odzyskiwania danych</li>
+<li data-pl="Trudniejsza konfiguracja" data-ua="Складніше налаштування">Trudniejsza konfiguracja</li>
+</ul>
+</div>
+
+<!-- RAID 10 -->
+<div class="card p-3 mb-3">
+<h5 data-pl="RAID 10" data-ua="RAID 10">RAID 10</h5>
+<img src="raid10.webp" alt="RAID 10" class="img-card">
+<p data-pl="RAID 10 łączy RAID 0 i RAID 1, wymaga co najmniej 4 dysków." 
+   data-ua="RAID 10 поєднує RAID 0 і RAID 1, потрібно мінімум 4 диски.">
+RAID 10 łączy RAID 0 i RAID 1, wymaga co najmniej 4 dysków.
+</p>
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Wysoka wydajność" data-ua="Висока продуктивність">Wysoka wydajność</li>
+<li data-pl="Odporność na awarie" data-ua="Відмовостійкість">Odporność na awarie</li>
+<li data-pl="Szybkie odzyskiwanie danych" data-ua="Швидке відновлення даних">Szybkie odzyskiwanie danych</li>
+</ul>
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Drogi" data-ua="Дорогий">Drogi</li>
+<li data-pl="Połowa pojemności wykorzystana" data-ua="Використовується лише половина обсягу">Połowa pojemności wykorzystana</li>
+<li data-pl="Trudniejsza konfiguracja" data-ua="Складніше налаштування">Trudniejsza konfiguracja</li>
+</ul>
+</div>
+<!-- RAID 6 -->
+<div class="card p-3 mb-3 fade-in">
+<h5 data-pl="RAID 6" data-ua="RAID 6">RAID 6</h5>
+<img src="raid6.png" alt="RAID 6" class="img-card">
+<p data-pl="RAID 6 to rozszerzenie RAID 5, które używa podwójnej parzystości. Wymaga co najmniej 4 dysków i może tolerować awarię dwóch dysków jednocześnie."
+   data-ua="RAID 6 — це розширення RAID 5, яке використовує подвійну парність. Потрібно мінімум 4 диски, масив може витримати вихід з ладу двох дисків одночасно.">
+RAID 6 to rozszerzenie RAID 5, które używa podwójnej parzystości. Wymaga co najmniej 4 dysków i może tolerować awarię dwóch dysków jednocześnie.
+</p>
+
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Odporność na awarię dwóch dysków" data-ua="Відмовостійкість при виході з ладу двох дисків">Odporność na awarię dwóch dysków</li>
+<li data-pl="Dobry odczyt danych" data-ua="Хороша швидкість читання">Dobry odczyt danych</li>
+</ul>
+
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Wolniejszy zapis niż RAID 5" data-ua="Повільніший запис ніж у RAID 5">Wolniejszy zapis niż RAID 5</li>
+<li data-pl="Trudniejsza odbudowa macierzy" data-ua="Складніше відновлення масиву">Trudniejsza odbudowa macierzy</li>
+</ul>
+</div>
+
+<!-- RAID 50 -->
+<div class="card p-3 mb-3 fade-in">
+<h5 data-pl="RAID 50" data-ua="RAID 50">RAID 50</h5>
+<img src="raid50.png" alt="RAID 50" class="img-card">
+<p data-pl="RAID 50 łączy striping RAID 0 oraz parzystość RAID 5. Wymaga co najmniej 6 dysków. Zapewnia wysoką wydajność oraz lepszą odporność na awarie niż RAID 5."
+   data-ua="RAID 50 поєднує чергування RAID 0 та парність RAID 5. Потрібно мінімум 6 дисків. Забезпечує високу продуктивність і кращу відмовостійкість, ніж RAID 5.">
+RAID 50 łączy striping RAID 0 oraz parzystość RAID 5. Wymaga co najmniej 6 dysków. Zapewnia wysoką wydajność oraz lepszą odporność na awarie niż RAID 5.
+</p>
+
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Wysoka wydajność" data-ua="Висока продуктивність">Wysoka wydajność</li>
+<li data-pl="Odporność na awarie jednego dysku w każdej grupie RAID 5" data-ua="Витримує вихід з ладу одного диска в кожній групі RAID 5">Odporność na awarie jednego dysku w każdej grupie RAID 5</li>
+<li data-pl="Lepszy zapis niż RAID 6" data-ua="Краща швидкість запису ніж у RAID 6">Lepszy zapis niż RAID 6</li>
+</ul>
+
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Droższy od RAID 5" data-ua="Дорожчий за RAID 5">Droższy od RAID 5</li>
+<li data-pl="Złożona konfiguracja" data-ua="Складна конфігурація">Złożona konfiguracja</li>
+</ul>
+</div>
+
+<!-- RAID 60 -->
+<div class="card p-3 mb-3 fade-in">
+<h5 data-pl="RAID 60" data-ua="RAID 60">RAID 60</h5>
+<img src="raid60.png" alt="RAID 60" class="img-card">
+<p data-pl="RAID 60 łączy striping RAID 0 oraz podwójną parzystość RAID 6. Wymaga co najmniej 8 dysków. Może tolerować awarię dwóch dysków w każdej grupie RAID 6."
+   data-ua="RAID 60 поєднує чергування RAID 0 та подвійну парність RAID 6. Потрібно мінімум 8 дисків. Витримує вихід з ладу двох дисків у кожній групі RAID 6.">
+RAID 60 łączy striping RAID 0 oraz podwójną parzystość RAID 6. Wymaga co najmniej 8 dysków. Może tolerować awarię dwóch dysków w każdej grupie RAID 6.
+</p>
+
+<p data-pl="Zalety:" data-ua="Переваги:">Zalety:</p>
+<ul>
+<li data-pl="Bardzo wysoka odporność na awarie" data-ua="Дуже висока відмовостійкість">Bardzo wysoka odporność na awarie</li>
+<li data-pl="Dobra wydajność" data-ua="Хороша продуктивність">Dobra wydajność</li>
+<li data-pl="Najlepsze zabezpieczenie przy dużych macierzach" data-ua="Найкращий захист для великих масивів">Najlepsze zabezpieczenie przy dużych macierzach</li>
+</ul>
+
+<p data-pl="Wady:" data-ua="Недоліки:">Wady:</p>
+<ul>
+<li data-pl="Bardzo drogi" data-ua="Дуже дорогий">Bardzo drogi</li>
+<li data-pl="Wolniejszy zapis niż RAID 50" data-ua="Повільніший за RAID 50 під час запису">Wolniejszy zapis niż RAID 50</li>
+<li data-pl="Złożona konfiguracja" data-ua="Складна конфігурація">Złożona konfiguracja</li>
+</ul>
+</div>
+<section class="mb-5 fade-in">
+  <h2 data-pl="Różnica między sprzętowym a programowym RAID" data-ua="Різниця між апаратним та програмним RAID">
+    Różnica między sprzętowym a programowym RAID
+  </h2>
+
+  <p data-pl="Istnieją dwa sposoby używania RAID: sprzętowy i programowy. W przypadku sprzętowego RAID przetwarzanie odbywa się na zewnętrznym CPU z użyciem kontrolera RAID. W przypadku programowego RAID przetwarzanie odbywa się na procesorze hosta." 
+     data-ua="Існують два способи використання RAID: апаратний та програмний. Якщо обробка RAID відбувається на зовнішньому ЦП, це апаратне налаштування RAID з використанням RAID-контролера. Якщо обробка відбувається на центральному процесорі хост-сервера, це програмний RAID.">
+    Istnieją dwa sposoby używania RAID: sprzętowy i programowy. W przypadku sprzętowego RAID przetwarzanie odbywa się na zewnętrznym CPU z użyciem kontrolera RAID. W przypadku programowego RAID przetwarzanie odbywa się na procesorze hosta.
+  </p>
+
+  <p data-pl="Przykład:" data-ua="Приклад:">Przykład:</p>
+  <ul>
+    <li data-pl="W przypadku sprzętowego RAID wstawiasz kartę kontrolera RAID do szybkiego slotu PCI-Express na płycie głównej i podłączasz do dysków."
+        data-ua="При налаштуванні апаратного RAID-масиву ви вставляєте карту RAID-контролера у швидкий слот PCI-Express на материнській платі та підключаєте її до дисків.">
+      W przypadku sprzętowego RAID wstawiasz kartę kontrolera RAID do szybkiego slotu PCI-Express na płycie głównej i podłączasz do dysków.
+    </li>
+    <li data-pl="W przypadku programowego RAID bez użycia kontrolera RAID, zarządzasz dyskami za pomocą oprogramowania systemowego."
+        data-ua="Для налаштування програмного RAID-масиву без використання RAID-контролера, ви керуєте дисками за допомогою служебної програми в ОС.">
+      W przypadku programowego RAID bez użycia kontrolera RAID, zarządzasz dyskami za pomocą oprogramowania systemowego.
+    </li>
+  </ul>
+
+  <p data-pl="Wszystkie poziomy RAID, z wyjątkiem RAID 0, zapewniają ochronę przed awarią jednego dysku. Dla bezpieczeństwa nadal należy tworzyć kopie zapasowe danych." 
+     data-ua="Всі рівні RAID, крім RAID 0, забезпечують захист від збою одного диска. Для надійності все одно слід створювати резервні копії даних.">
+    Wszystkie poziomy RAID, z wyjątkiem RAID 0, zapewniają ochronę przed awarią jednego dysku. Dla bezpieczeństwa nadal należy tworzyć kopie zapasowe danych.
+  </p>
+</section>
+
+<div class="footer fade-in" data-pl="Projekt Ihor Kutsyn 2025" data-ua="Проєкт Ihor Kutsyn 2025">
+  Projekt Ihor Kutsyn 2025
+</div>
+
+<script>
+document.getElementById("langToggle").addEventListener("click", () => {
+    const elements = document.querySelectorAll("[data-pl]");
+    const langBtn = document.getElementById("langToggle");
+    if (langBtn.textContent.includes("PL")) {
+        langBtn.textContent = "🇺🇦 UA";
+        elements.forEach(el => el.textContent = el.dataset.ua);
+    } else {
+        langBtn.textContent = "🇵🇱 PL";
+        elements.forEach(el => el.textContent = el.dataset.pl);
+    }
+});
+</script>
+
+</body>
+</html>
+
+
+
