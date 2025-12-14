@@ -296,77 +296,127 @@ document.getElementById("result").textContent = effective + " GB";
 </script>
 
 
-<!-- RAID Calculator Block -->
+<!-- RAID Calculator -->
 <section class="mb-5 fade-in">
-<h2>Kalkulator RAID</h2>
-<p>Ten prosty kalkulator pozwala szybko obliczyć dostępną pojemność macierzy RAID oraz tolerancję awarii na podstawie wybranego poziomu RAID i liczby dysków.</p>
+  <h2 data-pl="Kalkulator RAID" data-ua="RAID калькулятор">
+    Kalkulator RAID
+  </h2>
 
+  <p data-pl="Oblicza dostępną pojemność i tolerancję awarii."
+     data-ua="Обчислює доступний обсяг і відмовостійкість.">
+    Oblicza dostępną pojemność i tolerancję awarii.
+  </p>
 
-<div class="card p-3 mb-3">
-<label class="form-label">Wybierz poziom RAID:</label>
-<select id="raidLevel" class="form-select mb-3">
-<option value="0">RAID 0</option>
-<option value="1">RAID 1</option>
-<option value="5">RAID 5</option>
-<option value="6">RAID 6</option>
-<option value="10">RAID 10</option>
-</select>
+  <div class="card p-3 mb-3">
 
+    <label class="form-label"
+      data-pl="Poziom RAID:"
+      data-ua="Рівень RAID:">
+      Poziom RAID:
+    </label>
+    <select id="raidLevel" class="form-select mb-3">
+      <option value="0">RAID 0</option>
+      <option value="1">RAID 1</option>
+      <option value="5">RAID 5</option>
+      <option value="6">RAID 6</option>
+      <option value="10">RAID 10</option>
+      <option value="50">RAID 50</option>
+      <option value="60">RAID 60</option>
+    </select>
 
-<label class="form-label">Liczba dysków:</label>
-<input type="number" id="driveCount" class="form-control mb-3" min="2" value="4">
+    <label class="form-label"
+      data-pl="Liczba dysków:"
+      data-ua="Кількість дисків:">
+      Liczba dysków:
+    </label>
+    <input type="number" id="driveCount" class="form-control mb-3" min="2" value="4">
 
+    <label class="form-label"
+      data-pl="Pojemność jednego dysku (GB):"
+      data-ua="Обсяг одного диска (GB):">
+      Pojemność jednego dysku (GB):
+    </label>
+    <input type="number" id="driveSize" class="form-control mb-3" min="1" value="1000">
 
-<label class="form-label">Pojemność jednego dysku (GB):</label>
-<input type="number" id="driveSize" class="form-control mb-3" min="1" value="1000">
+    <button id="calculateRaid" class="btn btn-primary mt-2"
+      data-pl="Oblicz"
+      data-ua="Обчислити">
+      Oblicz
+    </button>
 
-
-<button id="calculateRaid" class="btn btn-primary mt-2">Oblicz</button>
-
-
-<div id="raidResult" class="mt-3"></div>
-</div>
+    <div id="raidResult" class="mt-3"></div>
+  </div>
 </section>
-
 
 <script>
 document.getElementById("calculateRaid").addEventListener("click", () => {
-const level = document.getElementById("raidLevel").value;
-const n = parseInt(document.getElementById("driveCount").value);
-const size = parseInt(document.getElementById("driveSize").value);
-let usable = 0;
-let fault = 0;
+  const level = document.getElementById("raidLevel").value;
+  const n = parseInt(document.getElementById("driveCount").value);
+  const size = parseInt(document.getElementById("driveSize").value);
 
+  let usable = 0;
+  let fault = 0;
 
-if (level == "0") {
-usable = n * size;
-fault = 0;
-}
-else if (level == "1") {
-usable = size;
-fault = n - 1;
-}
-else if (level == "5") {
-if (n < 3) return alert("RAID 5 wymaga minimum 3 dysków!");
-usable = (n - 1) * size;
-fault = 1;
-}
-else if (level == "6") {
-if (n < 4) return alert("RAID 6 wymaga minimum 4 dysków!");
-usable = (n - 2) * size;
-fault = 2;
-}
-else if (level == "10") {
-if (n % 2 != 0) return alert("RAID 10 wymaga parzystej liczby dysków!");
-usable = (n / 2) * size;
-fault = n / 2;
-}
+  if (level === "0") {
+    usable = n * size;
+    fault = 0;
+  }
 
+  else if (level === "1") {
+    if (n < 2) return alert("RAID 1: minimum 2 dyski");
+    usable = Math.floor(n / 2) * size;
+    fault = Math.floor(n / 2);
+  }
 
-document.getElementById("raidResult").innerHTML = `<div class='alert alert-info'>
-<strong>Dostępna pojemność:</strong> ${usable} GB<br>
-<strong>Tolerancja awarii:</strong> ${fault} dysków
-</div>`;
+  else if (level === "5") {
+    if (n < 3) return alert("RAID 5: minimum 3 dyski");
+    usable = (n - 1) * size;
+    fault = 1;
+  }
+
+  else if (level === "6") {
+    if (n < 4) return alert("RAID 6: minimum 4 dyski");
+    usable = (n - 2) * size;
+    fault = 2;
+  }
+
+  else if (level === "10") {
+    if (n < 4 || n % 2 !== 0)
+      return alert("RAID 10: min. 4 dyski, parzysta liczba");
+    usable = (n / 2) * size;
+    fault = n / 2; // po jednym z każdej pary
+  }
+
+  else if (level === "50") {
+    if (n < 6)
+      return alert("RAID 50: minimum 6 dysków");
+    usable = (n - 2) * size;
+    fault = 1; // na grupę RAID 5
+  }
+
+  else if (level === "60") {
+    if (n < 8)
+      return alert("RAID 60: minimum 8 dysków");
+    usable = (n - 4) * size;
+    fault = 2; // na grupę RAID 6
+  }
+
+  const loss = n * size - usable;
+  const lossPercent = ((loss / (n * size)) * 100).toFixed(1);
+
+  document.getElementById("raidResult").innerHTML = `
+    <div class="alert alert-info">
+      <b data-pl="Dostępna pojemność:" data-ua="Доступний обсяг:">
+        Dostępna pojemność:
+      </b> ${usable} GB<br>
+      <b data-pl="Tolerancja awarii:" data-ua="Відмовостійкість:">
+        Tolerancja awarii:
+      </b> ${fault} dysków<br>
+      <b data-pl="Utrata pojemności:" data-ua="Втрачений обсяг:">
+        Utrata pojemności:
+      </b> ${lossPercent}%
+    </div>
+  `;
 });
 </script>
 <div class="footer fade-in" data-pl="Projekt Ihor Kutsyn 2025" data-ua="Проєкт Ihor Kutsyn 2025">
@@ -377,6 +427,7 @@ document.getElementById("raidResult").innerHTML = `<div class='alert alert-info'
 
 </body>
 </html>
+
 
 
 
